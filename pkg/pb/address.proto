@@ -1,0 +1,42 @@
+syntax="proto3";
+package address;
+option go_package="./pkg/pb";
+service AddressService{
+    rpc CreateAddress(CreateAddressRequest) returns (CreateAddressResponse) {}
+    rpc GetAddress(GetAddressRequest) returns (GetAddressResponse) {}
+}
+//Address
+
+message CreateAddressRequest{
+    string userid=1;
+    string country=2;
+    string state=3;
+    string district=4;
+    string streetname=5;
+    string pincode=6;
+    string phone=7;
+    bool default=8;
+}
+message CreateAddressResponse{
+    int64 status=1;
+    string error=2;
+}
+message Address {
+    int64 id = 1;  // Address ID
+    string user_id = 2;  // User ID (foreign key)
+    string country = 3;
+    string state = 4;
+    string district = 5;
+    string street_name = 6;
+    string pincode = 7;
+    string phone = 8;
+    bool default = 9;
+}
+message GetAddressRequest{
+    string userid=1;
+}
+message GetAddressResponse{
+    int64 status=1;
+    string error=2;
+    repeated Address addresses = 3;  // List of addresses
+}
